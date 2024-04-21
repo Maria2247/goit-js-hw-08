@@ -63,12 +63,13 @@ gallery.insertAdjacentHTML("beforeend", galleryMarkup);
 
 function galleryOnClick(event) {
     event.preventDefault();
-
-    const link = event.target.parentElement;
+    if (event.target.tagName !== "IMG") {
+        return;
+    }
+    const originalUrl = event.target.getAttribute("data-source");
+    console.log("originalUrl: ", originalUrl);
     console.log("event.target: ", event.target);
     console.log("event.currentTarget: ", event.currentTarget);
-
-    const originalUrl = link.href;
 
     // Ініціалізація модального вікна
     const instance = basicLightbox.create(`<img src="${originalUrl}" width="800" height="600">`);
